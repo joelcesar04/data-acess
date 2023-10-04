@@ -12,7 +12,8 @@ namespace BaltaDataAcessAuthor
 
       using (var connection = new SqlConnection(connectionString))
       {
-        CreateAuthor(connection);
+        // CreateAuthor(connection);
+        UpdateAuthor(connection);
         ListAuthor(connection);
       }
     }
@@ -70,6 +71,18 @@ namespace BaltaDataAcessAuthor
         newAuthor.Type
       });
       Console.WriteLine($"{rows} linhas foram afetadas.");
+    }
+  
+    static void UpdateAuthor(SqlConnection connection)
+    {
+      var udpateSql = "UPDATE [Author] SET [Email] = @Email WHERE [Id] = @Id";
+
+      var rows = connection.Execute(udpateSql, new
+      {
+        Email = "tiago@balta.io",
+        Id = "5cec296f-e717-9a0a-437b-bf5900000000"
+      });
+      Console.WriteLine($"{rows} linhas foram afetadas");
     }
   }
 }
